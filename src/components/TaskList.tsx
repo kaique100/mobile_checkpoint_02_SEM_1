@@ -6,10 +6,10 @@ import DeleteModal from "./DeleteModal"
 
 interface TaskItemProps {
     id: number
-    title: string
+    task: string
 }
 
-function TaskItem({ id, title }: TaskItemProps) {
+function TaskItem({ id, task }: TaskItemProps) {
     const { updateTask } = useGlobalState()
 
     const [updating, setUpdating] = useState(false)
@@ -20,7 +20,7 @@ function TaskItem({ id, title }: TaskItemProps) {
         setIsModalOpen(!isModalOpen)
     }
 
-    const [newTitle, setNewTitle] = useState(title)
+    const [newTitle, setNewTitle] = useState(task)
 
     function handleUpdate() {
         if (updating) {
@@ -51,7 +51,7 @@ function TaskItem({ id, title }: TaskItemProps) {
                     color={"white"}
                 />
             ) : (
-                <Text color={'#FFF'} flex={3}>{title}</Text>
+                <Text color={'#FFF'} flex={3}>{task}</Text>
             )}
 
             <IconButton
@@ -76,7 +76,7 @@ export default function TaskList() {
     return (
         <FlatList
           data={tasks} 
-          renderItem={({ item }) => <TaskItem id={item.id} title={item.title} />} 
+          renderItem={({ item }) => <TaskItem id={item.id} task={item.task} />} 
           keyExtractor={(item) => item.id.toString()} 
           contentContainerStyle={{ flexGrow: 1 }}
         />
